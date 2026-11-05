@@ -1,0 +1,97 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --accent: #8a1c2c;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: #f7f7f5;
+  color: #111114;
+  font-family: var(--font-sans), system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+::selection {
+  background: rgba(138, 28, 44, 0.18);
+}
+
+@layer components {
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 rounded-full px-5 py-2.5 text-sm font-semibold transition disabled:cursor-not-allowed disabled:opacity-50;
+  }
+  .btn-primary {
+    @apply bg-brand text-white hover:bg-brand-dark;
+  }
+  .btn-dark {
+    @apply bg-ink text-white hover:bg-ink/85;
+  }
+  .btn-ghost {
+    @apply border border-ink/15 bg-white text-ink hover:bg-ink/5;
+  }
+  .btn-danger {
+    @apply border border-red-200 bg-white text-red-700 hover:bg-red-50;
+  }
+  .field {
+    @apply w-full rounded-lg border border-ink/15 bg-white px-3 py-2 text-sm outline-none transition focus:border-brand focus:ring-2 focus:ring-brand/20;
+  }
+  .label {
+    @apply mb-1 block text-xs font-bold uppercase tracking-wider text-ink/55;
+  }
+  .pill {
+    @apply inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-xs font-semibold;
+  }
+  .container-x {
+    @apply mx-auto max-w-7xl px-4 sm:px-6;
+  }
+}
+
+/* ---------- Animations ---------- */
+@keyframes kenburns {
+  from { transform: scale(1) translate3d(0, 0, 0); }
+  to   { transform: scale(1.12) translate3d(-1.5%, -1%, 0); }
+}
+@keyframes fade-up {
+  from { opacity: 0; transform: translateY(28px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes fill-x {
+  from { transform: scaleX(0); }
+  to   { transform: scaleX(1); }
+}
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+@keyframes float-slow {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(-10px); }
+}
+
+.animate-kenburns { animation: kenburns 9s ease-out forwards; }
+.animate-fade-up  { animation: fade-up 0.9s cubic-bezier(0.22, 1, 0.36, 1) both; }
+.animate-fill-x   { animation: fill-x linear forwards; transform-origin: left; }
+.animate-marquee  { animation: marquee 45s linear infinite; }
+.animate-float    { animation: float-slow 6s ease-in-out infinite; }
+.pause-on-hover:hover .animate-marquee { animation-play-state: paused; }
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-kenburns, .animate-marquee, .animate-float { animation: none; }
+  .animate-fade-up { animation-duration: 0.01s; }
+}
+
+/* Briefly highlights the paragraph a reader jumps back to */
+@keyframes resume-flash {
+  0%   { background-color: rgba(138, 28, 44, 0.12); }
+  100% { background-color: transparent; }
+}
+.resume-flash {
+  animation: resume-flash 2.2s ease-out;
+  border-radius: 12px;
+}
